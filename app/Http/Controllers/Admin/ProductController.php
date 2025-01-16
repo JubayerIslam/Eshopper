@@ -19,9 +19,6 @@ class ProductController extends Controller
 
     public function productStore(Request $request)
     {
-
-  
-
         request()->validate([
             'name'             => 'required | min:3 | max:255',
             'category_id'      => 'required | integer',
@@ -32,10 +29,7 @@ class ProductController extends Controller
             'shortDescription' => 'required',
             'longDescription'  => 'required',
             'image'            => 'required',
-
         ]);
-
-
   
         if($request->file('image')){
             $imageName = time(). '.' .$request->image->extension();
@@ -53,7 +47,6 @@ class ProductController extends Controller
         $product->image       = $imageName;
         $product->save();
         return redirect()->back()->with('success', 'Product Added Successfully');
-
     }
 
     public function ManageProduct()
@@ -72,8 +65,6 @@ class ProductController extends Controller
 
     public function editProduct(Request $request, $id)
     {
-
-
         request()->validate([
             'name'             => 'required | min:3 | max:255',
             'category_id'      => 'required | integer',
@@ -84,28 +75,24 @@ class ProductController extends Controller
             'shortDescription' => 'required',
             'longDescription'  => 'required',
             'image'            => 'required',
-
         ]);
 
-
-  
         if($request->file('image')){
             $imageName = time(). '.' .$request->image->extension();
             $request->image->move('product/img/', $imageName);
         }
 
         $product = Product::find($id);
-        $product->name        = $request->name;
-        $product->category_id = $request->category_id;
-        $product->brand_id    = $request->brand_id;
-        $product->price       = $request->price;
-        $product->quantity    = $request->qty;
-        $product->sku         = $request->sku;
-        $product->short_desc  = $request->shortDescription;
-        $product->long_desc   = $request->longDescription;
-        $product->image       = $imageName;
+        $product->name        => $request->name;
+        $product->category_id => $request->category_id;
+        $product->brand_id    => $request->brand_id;
+        $product->price       => $request->price;
+        $product->quantity    => $request->qty;
+        $product->sku         => $request->sku;
+        $product->short_desc  => $request->shortDescription;
+        $product->long_desc   => $request->longDescription;
+        $product->image       => $imageName;
         $product->save();
         return redirect()->back()->with('success', 'Product Updated Successfully');
-
     }
 }
